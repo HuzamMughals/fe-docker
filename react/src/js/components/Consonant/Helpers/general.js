@@ -408,7 +408,7 @@ export const qs = {
                     }
                 }
 
-                accumulator[key] = value;
+                accumulator[key] = value.map(label => label.replace(/;/g, ','));
             }
 
             return accumulator;
@@ -420,14 +420,14 @@ export const qs = {
         Object.entries(obj).forEach(([key, value]) => {
             if (Array.isArray(value)) {
                 if (array === 'comma') {
-                    searchParams.append(key, value);
+                    searchParams.append(key, value.map(label => label.replace(/,/g, ';')));
                 } else {
                     value.forEach((valueItem) => {
                         searchParams.append(key, valueItem);
                     });
                 }
             } else {
-                searchParams.append(key, value);
+                searchParams.append(key, value.replace(/,/g, ';'));
             }
         });
 
