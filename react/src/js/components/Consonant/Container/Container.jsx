@@ -425,8 +425,9 @@ const Container = (props) => {
      */
     const changeUrlState = (filterId, itemId, isChecked) => {
         const { group, items } = filters.find(({ id }) => id === filterId);
-        const { label } = items.find(({ id }) => id === itemId);
+        let { label } = items.find(({ id }) => id === itemId);
 
+        label = label.replace(/,/g,";")
         const urlStateValue = urlState[group] || [];
         const value = isChecked
             ? [...urlStateValue, label]
@@ -558,7 +559,7 @@ const Container = (props) => {
                 opened: true,
                 items: items.map(item => ({
                     ...item,
-                    selected: urlStateValue.includes(String(item.label)),
+                    selected: urlStateValue.includes(String(item.label).replace(/,/g,";")),
                 })),
             };
         }));
