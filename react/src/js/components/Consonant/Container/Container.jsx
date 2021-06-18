@@ -425,7 +425,7 @@ const Container = (props) => {
      */
     const changeUrlState = (filterId, itemId, isChecked) => {
         const { group, items } = filters.find(({ id }) => id === filterId);
-        let { label } = items.find(({ id }) => id === itemId);
+        const { label } = items.find(({ id }) => id === itemId);
 
         const urlStateValue = urlState[group] || [];
         const value = isChecked
